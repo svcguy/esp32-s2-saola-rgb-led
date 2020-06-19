@@ -10,9 +10,16 @@
  * 
  */
 
+#pragma once
+
+#ifdef __cplusplus
+extern "C" {
+#endif /* __cplusplus */
+
 #include <math.h>
+#include "esp_err.h"
 #include "esp_log.h"
-#include "driver/rmt.h
+#include "driver/rmt.h"
 
 /**
  * @brief       Send a color to the RGB led in RGB format
@@ -33,3 +40,7 @@ esp_err_t esp_saola_led_set_color_rgb( uint32_t r, uint32_t g, uint32_t b );
  * @return      esp_err_t - ESP_OK on success, ESP_ERR_* on failure
  */
 esp_err_t esp_saola_led_set_color_hsv( uint32_t h, double s, double v );
+
+#ifdef __cplusplus
+}
+#endif /* __cplusplus */

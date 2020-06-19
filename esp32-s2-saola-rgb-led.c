@@ -12,6 +12,11 @@
 
 #include "esp32-s2-saola-rgb-led.h"
 
+#include <math.h>
+#include "esp_err.h"
+#include "esp_log.h"
+#include "driver/rmt.h"
+
 // Timing parameters from the datasheet
 // https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
 #define WS2812_T0H_NS   400
