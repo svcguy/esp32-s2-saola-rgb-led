@@ -125,55 +125,55 @@ esp_err_t esp_saola_led_set_color_rgb( uint32_t r, uint32_t g, uint32_t b )
 
 esp_err_t esp_saola_led_set_color_hsv( uint32_t h, double s, double v )
 {
-    // Thanks to github user kuathadianto for the algorithm
-    //    https://gist.github.com/kuathadianto/200148f53616cbd226d993b400214a7f
-    uint32_t r, g, b;
-    esp_err_t ret = ESP_OK;
+   // Thanks to github user kuathadianto for the algorithm
+   //    https://gist.github.com/kuathadianto/200148f53616cbd226d993b400214a7f
+   uint32_t r, g, b;
+   esp_err_t ret = ESP_OK;
 
-    ESP_LOGI(TAG, "Call to set led to H=%d, S=%f, V=%f", h, s, v);
-    // Parameter check
-    if(h > 360 || s > 1.0 || v > 1.0)
-    {
-        return ESP_ERR_INVALID_ARG;
-    }
-    // Convert HSV to RGB
-    double C = s * v;
-    double X = C * (1 - abs(fmod(h / 60.0, 2) - 1));
-    double m = v - C;
-    double Rs, Gs, Bs;
+   ESP_LOGI(TAG, "Call to set led to H=%d, S=%f, V=%f", h, s, v);
+   // Parameter check
+   if(h > 360 || s > 1.0 || v > 1.0)
+   {
+      return ESP_ERR_INVALID_ARG;
+   }
+   // Convert HSV to RGB
+   double C = s * v;
+   double X = C * (1 - abs(fmod(h / 60.0, 2) - 1));
+   double m = v - C;
+   double Rs, Gs, Bs;
 
 	if(h < 60) 
-    {
-		Rs = C;
+   {
+	   Rs = C;
 		Gs = X;
 		Bs = 0;	
 	}
 	else if(h >= 60 && h < 120) 
-    {	
+   {	
 		Rs = X;
 		Gs = C;
 		Bs = 0;	
 	}
 	else if(h >= 120 && h < 180) 
-    {
+   {
 		Rs = 0;
 		Gs = C;
 		Bs = X;	
 	}
 	else if(h >= 180 && h < 240) 
-    {
+   {
 		Rs = 0;
 		Gs = X;
 		Bs = C;	
 	}
 	else if(h >= 240 && h < 300) 
-    {
+   {
 		Rs = X;
 		Gs = 0;
 		Bs = C;	
 	}
 	else 
-    {
+   {
 		Rs = C;
 		Gs = 0;
 		Bs = X;	
